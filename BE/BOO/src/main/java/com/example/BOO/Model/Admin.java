@@ -1,0 +1,71 @@
+package com.example.BOO.Model;
+
+import com.example.BOO.Enum.Role;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.validation.constraints.NotBlank;
+
+@Entity
+public class Admin {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private int id ;
+
+    @NotBlank(message = "UserName can't be null")
+    private String username ;
+
+    @NotBlank(message = "Password can't be null")
+    private String password;
+
+    private Role role ;
+
+    private String image ;
+
+    public Admin() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", image='" + image + '\'' +
+                '}';
+    }
+}

@@ -1,0 +1,31 @@
+package com.example.BOO;
+
+import com.example.BOO.Model.Admin;
+import com.example.BOO.Repository.AdminRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+
+@SpringBootApplication
+public class BooApplication {
+
+	@Autowired
+	AdminRepository adminRepository ;
+	private static final Logger logger = LoggerFactory.getLogger(BooApplication.class);
+
+	public static void main(String[] args) {
+		SpringApplication.run(BooApplication.class, args);
+	}
+
+	@Bean
+	public void defaultAdmin(){
+		Admin admin = new Admin() ;
+		admin.setUsername("admin");
+		admin.setPassword("admin123");
+		admin = adminRepository.save(admin) ;
+		logger.info(String.format("This is the default admin : " + admin));
+	}
+}
