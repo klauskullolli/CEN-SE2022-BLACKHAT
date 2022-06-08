@@ -51,6 +51,14 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>com.twilio.sdk</groupId>
+			<artifactId>twilio</artifactId>
+			<version>8.31.0</version>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
@@ -68,6 +76,18 @@
 				</configuration>
 			</plugin>
 		</plugins>
+
+<!--		<resources>-->
+<!--			<resource>-->
+<!--				<directory>src/main/resources</directory>-->
+<!--				<includes>-->
+<!--					<include>**/*.properties</include>-->
+<!--					<include>**/*.yml</include>-->
+<!--					<include>**/*.jks</include>-->
+<!--				</includes>-->
+<!--			</resource>-->
+<!--		</resources>-->
+
 	</build>
 
 </project>

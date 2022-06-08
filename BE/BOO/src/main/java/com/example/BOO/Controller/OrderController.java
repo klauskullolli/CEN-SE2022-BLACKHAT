@@ -10,11 +10,14 @@ import com.example.BOO.Model.Sell;
 import com.example.BOO.Repository.ClientRepository;
 import com.example.BOO.Repository.OrderRepository;
 import com.example.BOO.Repository.ProductRepository;
+import com.example.BOO.Service.OrderService;
+import com.twilio.rest.api.v2010.account.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -31,6 +34,9 @@ public class OrderController {
 
     @Autowired
     ClientRepository clientRepository ;
+
+    @Autowired
+    OrderService orderService ;
 
     @GetMapping
     public List<Order> getAllOrders() {
@@ -177,7 +183,7 @@ public class OrderController {
 
                 }
                 else{
-                  throw new OrderNoAmountExeption("Product with id: "+ product_id + " doesn't any amount") ;
+                  throw new OrderNoAmountExeption("Product with id: "+ product_id + " doesn't have any amount") ;
                 }
 
 
@@ -190,6 +196,29 @@ public class OrderController {
         }
     }
 
+    @GetMapping("/{id}/sells")
+    public ResponseEntity<?> getSellsFromOrder(@PathVariable Integer id ){
+        return orderRepository.findById(id).map(order ->new ResponseEntity<>(order.getSells(), HttpStatus.OK)).
+                orElseThrow(()->new ResourceNotFoundException("Order with Id: " + id+ " does not exist"));
+    }
+
+    @GetMapping("{id}/ready-notify")
+    public ResponseEntity<?> notifyOrder(@PathVariable Integer id){
+        return orderRepository.findById(id).map(order ->{
+            Map<String, String> response = new HashMap<>() ;
+            Message.Status status  = orderService.notifyOrderReady(order.getId()) ;
+            if (status == Message.Status.DELIVERED){
+                response.put("message", "Message was sent successfully") ;
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            }
+            else{
+                response.put("message", "Message was not sent successfully") ;
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            }
+
+        }).
+                orElseThrow(()->new ResourceNotFoundException("Order with Id: " + id+ " does not exist"));
+    }
 
 
 
