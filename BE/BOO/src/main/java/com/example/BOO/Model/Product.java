@@ -35,10 +35,11 @@ public class Product {
 
     private String decription ;
 
-    @NotNull(message = "Belonging can't be null")
-    private Belonging belonging ;
 
     private String image ;
+
+
+
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id", nullable = false)
@@ -47,6 +48,9 @@ public class Product {
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Sell> sells = new ArrayList<>();
+
+    @OneToMany(mappedBy = "product", orphanRemoval = true)
+    private List<BillProduct> billProducts = new ArrayList<>();
 
     public Product() {
     }

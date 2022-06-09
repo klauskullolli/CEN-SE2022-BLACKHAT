@@ -1,5 +1,6 @@
 package com.example.BOO.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -15,7 +16,21 @@ public class BillProduct {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id ;
 
-    private  int amount ;
+    private String productName;
+
+    private  Integer amount ;
+
+    private  Double price ;
+
+    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    @JsonIgnore
+    private Product product;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "bill_id")
+    @JsonIgnore
+    private Bill bill;
 
     public BillProduct() {
     }

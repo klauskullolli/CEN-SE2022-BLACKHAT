@@ -3,6 +3,7 @@ package com.example.BOO.Model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -19,8 +20,10 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id ;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date deliveryTime;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:mm:ss")
     private Date prepareTime ;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)

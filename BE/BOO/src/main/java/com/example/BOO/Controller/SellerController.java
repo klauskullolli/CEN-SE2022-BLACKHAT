@@ -11,11 +11,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping
+@RequestMapping("/seller")
 public class SellerController {
 
     @Autowired
@@ -37,6 +38,7 @@ public class SellerController {
     @PostMapping
     public  ResponseEntity<Seller> createSeller(@Valid @RequestBody Seller seller){
         seller.setRole(Role.SELLER);
+        seller.setOnWork(false);
         return new ResponseEntity<>(sellerRepository.save(seller), HttpStatus.CREATED) ;
     }
 
@@ -69,5 +71,29 @@ public class SellerController {
             return   new ResponseEntity<>(sell.get(), HttpStatus.OK) ;
         }
     }
+
+    @GetMapping("/{id}/bills")
+    public ResponseEntity<?> getSellerBills(@PathVariable Integer id){
+        return sellerRepository.findById(id).map(seller -> {
+            return new ResponseEntity<>(seller.getBills() , HttpStatus.OK) ;
+        }).orElseThrow(()->new ResourceNotFoundException("Seller with Id: " + id+ " does not exist")) ;
+    }
+
+    @GetMapping("/{id}/orders")
+    public ResponseEntity<?> getSellerOrders(@PathVariable Integer id){
+        return sellerRepository.findById(id).map(seller -> {
+            return new ResponseEntity<>(seller.getOrders() , HttpStatus.OK) ;
+        }).orElseThrow(()->new ResourceNotFoundException("Seller with Id: " + id+ " does not exist")) ;
+    }
+
+    @PutMapping("{id}/turn")
+    public ResponseEntity<?> updateWorkingStatus(@PathVariable Integer id , @RequestParam(value = "open") boolean open){
+        return sellerRepository.findById(id).map(seller -> {
+            seller.setOnWork(open);
+            seller.setBills(new ArrayList<>());
+            return new ResponseEntity<>(seller.getOrders() , HttpStatus.OK) ;
+        }).orElseThrow(()->new ResourceNotFoundException("Seller with Id: " + id+ " does not exist")) ;
+    }
+
 
 }

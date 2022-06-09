@@ -1,5 +1,6 @@
 package com.example.BOO.Controller;
 
+import com.example.BOO.Enum.Belonging;
 import com.example.BOO.Exception.DublicatedCategoryExeption;
 import com.example.BOO.Exception.ResourceNotFoundException;
 import com.example.BOO.Model.Category;
@@ -80,5 +81,21 @@ public class CategoryController {
                 .orElseThrow(()-> new ResourceNotFoundException("Category with id: " + id+ " does not exist") )  ;
     }
 
+    @GetMapping("/belonging/{name}")
+    public ResponseEntity<?> getCategoryByBelonging(@PathVariable String name){
+
+        name = name.toUpperCase(Locale.ROOT) ;
+        if(Belonging.CAFETERIA.name().equals(name)){
+            return new ResponseEntity<>(categoryRepository.findCategoryByBelonging(Belonging.CAFETERIA) , HttpStatus.OK) ;
+        }
+        else if(Belonging.CANTINA.name().equals(name)){
+            return new ResponseEntity<>(categoryRepository.findCategoryByBelonging(Belonging.CANTINA) , HttpStatus.OK) ;
+        }
+        else{
+            throw  new ResourceNotFoundException("Belonging with name: " + name+ " does not exist") ;
+        }
+
+
+    }
 
 }

@@ -4,6 +4,9 @@ import com.example.BOO.Config.TwilioConfiguration;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class TwilioConfig {
 
     @Autowired
@@ -11,8 +14,8 @@ public class TwilioConfig {
 
     @Test
     public void test1(){
-
-        System.out.println(twilioConfiguration.getAccountSid());
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+        System.out.println(formatter.format(new Date()));
 
     }
 }

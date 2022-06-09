@@ -3,10 +3,7 @@ package com.example.BOO.Controller;
 import com.example.BOO.Exception.DublicatedOrderExeption;
 import com.example.BOO.Exception.OrderNoAmountExeption;
 import com.example.BOO.Exception.ResourceNotFoundException;
-import com.example.BOO.Model.Client;
-import com.example.BOO.Model.Order;
-import com.example.BOO.Model.Product;
-import com.example.BOO.Model.Sell;
+import com.example.BOO.Model.*;
 import com.example.BOO.Repository.ClientRepository;
 import com.example.BOO.Repository.OrderRepository;
 import com.example.BOO.Repository.ProductRepository;
@@ -196,6 +193,19 @@ public class OrderController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Order> deleteOrder (@PathVariable Integer id){
+        Optional<Order> orderOptional = orderRepository.findById(id) ;
+        if(orderOptional.isEmpty() ){
+            throw new ResourceNotFoundException("Order with id: " + id+ " does not exist") ;
+        }
+        else {
+            orderRepository.deleteById(id);
+            return   new ResponseEntity<>(orderOptional.get(), HttpStatus.OK) ;
+        }
+    }
+
+
     @GetMapping("/{id}/sells")
     public ResponseEntity<?> getSellsFromOrder(@PathVariable Integer id ){
         return orderRepository.findById(id).map(order ->new ResponseEntity<>(order.getSells(), HttpStatus.OK)).
@@ -219,6 +229,32 @@ public class OrderController {
         }).
                 orElseThrow(()->new ResourceNotFoundException("Order with Id: " + id+ " does not exist"));
     }
+
+    @GetMapping("{id}/confirm")
+    public ResponseEntity<?> confirmOrder(@PathVariable Integer id){
+        Optional<Order> orderOptional = orderRepository.findById(id) ;
+        if(orderOptional.isPresent()){
+
+            Map<String, Object> response = new HashMap<>();
+            Bill bill = orderService.confirmOrder(orderOptional.get()) ;
+
+            if(bill!=null){
+                response.put("message", "Bill created successfully") ;
+                response.put("bill", bill ) ;
+
+                return new  ResponseEntity<>(response, HttpStatus.CREATED) ;
+            }
+            else {
+                response.put("message", "Bill wasn't created successfully") ;
+                return new ResponseEntity<>(response , HttpStatus.BAD_REQUEST) ;
+            }
+
+        }else{
+            throw  new ResourceNotFoundException("Order with Id: " + id+ " does not exist");
+        }
+
+    }
+
 
 
 

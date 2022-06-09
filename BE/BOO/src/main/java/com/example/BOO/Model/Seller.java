@@ -33,6 +33,11 @@ public class Seller {
     @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Order> orders = new ArrayList<>();
 
+    @OneToMany(mappedBy = "seller", orphanRemoval = true)
+    private List<Bill> bills = new ArrayList<>();
+
+
+
     public Seller() {
     }
 }

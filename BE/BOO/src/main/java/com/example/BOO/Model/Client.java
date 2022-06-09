@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -21,8 +23,9 @@ public class Client {
     private String number ;
 
     @OneToOne(mappedBy = "client",  cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-//    @JsonIgnore
     private Order order;
+
+
 
     public Client() {
     }
