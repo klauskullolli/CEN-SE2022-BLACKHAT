@@ -1,7 +1,6 @@
 package com.example.BOO.Controller;
 
 import com.example.BOO.Exception.ResourceNotFoundException;
-import com.example.BOO.Model.Category;
 import com.example.BOO.Model.Client;
 import com.example.BOO.Repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;

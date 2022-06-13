@@ -1,5 +1,6 @@
 package com.example.BOO.Controller;
 
+import com.example.BOO.Exception.BadRequestException;
 import com.example.BOO.Exception.DublicatedOrderExeption;
 import com.example.BOO.Exception.OrderNoAmountExeption;
 import com.example.BOO.Exception.ResourceNotFoundException;
@@ -253,6 +254,25 @@ public class OrderController {
             throw  new ResourceNotFoundException("Order with Id: " + id+ " does not exist");
         }
 
+    }
+
+    @PostMapping("{id}/assignTo/seller")
+    public ResponseEntity<?> assignOrderToSeller(@PathVariable Integer id){
+        Optional<Order> orderOptional = orderRepository.findById(id) ;
+        if(orderOptional.isPresent()){
+            Order order = orderOptional.get();
+            if(order.getSeller()!=null) throw new BadRequestException("Order with Id: " + id+ " is assigned to a seller already") ;
+            else {
+                Seller seller = orderService.asignOrderToSeller(order);
+                if (seller == null) throw new BadRequestException("There is no seller to assign the order") ;
+                else{
+                    return new ResponseEntity<>(seller, HttpStatus.OK) ;
+                }
+            }
+        }
+        else{
+            throw  new ResourceNotFoundException("Order with Id: " + id+ " does not exist");
+        }
     }
 
 

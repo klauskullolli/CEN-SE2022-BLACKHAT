@@ -14,7 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "product")
+@Table(name = "product", uniqueConstraints = {
+        @UniqueConstraint(name = "uc_product_name", columnNames = {"name"})
+})
 @Getter
 @Setter
 @AllArgsConstructor

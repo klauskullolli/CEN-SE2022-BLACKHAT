@@ -64,4 +64,12 @@ public class GlobalExceptionHandler {
         return  errorDetails;
     }
 
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ExceptionHandler(BadRequestException.class)
+    public ErrorDetails badRequestHandling(BadRequestException ex , WebRequest request){
+        ErrorDetails errorDetails =
+                new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
+        return  errorDetails;
+    }
+
 }

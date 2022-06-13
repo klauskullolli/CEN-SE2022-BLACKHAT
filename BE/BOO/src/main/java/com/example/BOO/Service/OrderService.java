@@ -5,17 +5,17 @@ import com.example.BOO.Exception.ResourceNotFoundException;
 import com.example.BOO.Model.*;
 import com.example.BOO.Repository.BillRepository;
 import com.example.BOO.Repository.OrderRepository;
+import com.example.BOO.Repository.SellerRepository;
 import com.twilio.Twilio;
 import com.twilio.rest.api.v2010.account.Message;
 import com.twilio.type.PhoneNumber;
+import org.aspectj.weaver.ast.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.Table;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.Optional;
-import java.util.List ;
+import java.util.*;
 
 @Service
 public class OrderService {
@@ -28,6 +28,9 @@ public class OrderService {
 
     @Autowired
     BillRepository billRepository ;
+
+    @Autowired
+    SellerRepository sellerRepository ;
 
     private SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
@@ -88,8 +91,31 @@ public class OrderService {
         }
     }
 
+    public  Seller asignOrderToSeller(Order order){
+        List<Seller> sellers = sellerRepository.findAll();
+        if (sellers.size()>0){
+            int sellerIndex = randInt(0 , sellers.size()-1) ;
+            Seller seller = sellers.get(sellerIndex) ;
+            order.setSeller(seller);
+            order.setDeliveryTime(new Date());
+            seller.getOrders().add(order) ;
+            seller = sellerRepository.save(seller);
+            return  seller ;
+        }
+        return null;
+    }
 
+    public static int randInt(int min, int max) {
+        if(max > min){
+            Random rand = new Random();
 
+            int randomNum = rand.nextInt((max - min) + 1) + min;
+
+            return randomNum;
+        }
+        else throw new RuntimeException("Max should be grater than min") ;
+
+    }
 
 
 }
