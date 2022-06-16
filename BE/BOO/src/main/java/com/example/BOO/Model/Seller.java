@@ -9,6 +9,9 @@ import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 
+@Table(name = "Seller", uniqueConstraints = {
+        @UniqueConstraint(name = "uc_seller_username", columnNames = {"username"})
+})
 @Entity
 @Getter
 @Setter
@@ -18,6 +21,7 @@ public class Seller {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id ;
 
+    @Column(unique = true)
     @NotBlank(message = "UserName can't be null")
     private String username ;
 
@@ -30,7 +34,7 @@ public class Seller {
 
     private  Boolean onWork ;
 
-    @OneToMany(mappedBy = "seller", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "seller")
     private List<Order> orders = new ArrayList<>();
 
     @OneToMany(mappedBy = "seller", orphanRemoval = true)

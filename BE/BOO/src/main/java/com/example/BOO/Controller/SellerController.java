@@ -3,7 +3,11 @@ package com.example.BOO.Controller;
 
 import com.example.BOO.Enum.Role;
 import com.example.BOO.Exception.ResourceNotFoundException;
+import com.example.BOO.Model.Bill;
+import com.example.BOO.Model.Order;
 import com.example.BOO.Model.Seller;
+import com.example.BOO.Repository.BillRepository;
+import com.example.BOO.Repository.OrderRepository;
 import com.example.BOO.Repository.SellerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -21,6 +25,9 @@ public class SellerController {
 
     @Autowired
     SellerRepository sellerRepository ;
+
+    @Autowired
+    BillRepository billRepository;
 
     @GetMapping()
     public List<Seller> getSellers(){
@@ -90,8 +97,17 @@ public class SellerController {
     public ResponseEntity<?> updateWorkingStatus(@PathVariable Integer id , @RequestParam(value = "open") boolean open){
         return sellerRepository.findById(id).map(seller -> {
             seller.setOnWork(open);
-            seller.setBills(new ArrayList<>());
-            return new ResponseEntity<>(seller.getOrders() , HttpStatus.OK) ;
+            if(seller.getBills().size()>0){
+                List<Bill> bills = new ArrayList<>();
+                for (Bill bill : seller.getBills()){
+                    bill.setSeller(null);
+                    bills.add(bill);
+                }
+                billRepository.saveAll(bills);
+                seller.setBills(new ArrayList<>());
+            }
+
+            return new ResponseEntity<>(sellerRepository.save(seller) , HttpStatus.OK) ;
         }).orElseThrow(()->new ResourceNotFoundException("Seller with Id: " + id+ " does not exist")) ;
     }
 

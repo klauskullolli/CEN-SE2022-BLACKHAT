@@ -12,6 +12,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import java.util.List ;
 
 @SpringBootApplication
 public class BooApplication {
@@ -30,11 +31,14 @@ public class BooApplication {
 
 	@Bean
 	public void defaultAdmin(){
-		Admin admin = new Admin() ;
-		admin.setUsername("admin");
-		admin.setPassword("admin123");
-		admin = adminRepository.save(admin) ;
-		logger.info(String.format("This is the default admin : " + admin));
+		List  <Admin> admins = adminRepository.findAll() ;
+		if (admins.size()==0){
+			Admin admin = new Admin() ;
+			admin.setUsername("admin");
+			admin.setPassword("admin123");
+			admin = adminRepository.save(admin) ;
+			logger.info(String.format("This is the default admin : " + admin));
+			}
 	}
 
 	@Bean

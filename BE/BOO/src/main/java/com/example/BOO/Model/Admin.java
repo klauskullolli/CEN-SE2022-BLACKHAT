@@ -2,18 +2,19 @@ package com.example.BOO.Model;
 
 import com.example.BOO.Enum.Role;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
+@Table(name = "Admin", indexes = {
+        @Index(name = "idx_admin_username", columnList = "username")
+})
 @Entity
 public class Admin {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id ;
 
+    @Column(unique = true)
     @NotBlank(message = "UserName can't be null")
     private String username ;
 

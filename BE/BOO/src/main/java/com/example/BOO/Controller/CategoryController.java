@@ -57,7 +57,8 @@ public class CategoryController {
         else {
              Category newCategory  = cat.get() ;
              newCategory.setName(category.getName());
-            return   new ResponseEntity<>(createCategory(newCategory).getBody(), HttpStatus.OK) ;
+             newCategory.setBelonging(category.getBelonging());
+            return   new ResponseEntity<>(categoryRepository.save(newCategory), HttpStatus.OK) ;
         }
     }
 

@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.Table;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -92,7 +93,7 @@ public class OrderService {
     }
 
     public  Seller asignOrderToSeller(Order order){
-        List<Seller> sellers = sellerRepository.findAll();
+        List<Seller> sellers = sellerRepository.findAll().stream().filter(seller -> seller.getOnWork()).collect(Collectors.toList());
         if (sellers.size()>0){
             int sellerIndex = randInt(0 , sellers.size()-1) ;
             Seller seller = sellers.get(sellerIndex) ;

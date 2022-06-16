@@ -1,10 +1,8 @@
 package com.example.BOO.Exception;
 
-import io.swagger.v3.oas.annotations.Hidden;
+
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -67,6 +65,22 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadRequestException.class)
     public ErrorDetails badRequestHandling(BadRequestException ex , WebRequest request){
+        ErrorDetails errorDetails =
+                new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
+        return  errorDetails;
+    }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(UnAuthenticatedException.class)
+    public ErrorDetails unAuthenticatedHandling(UnAuthenticatedException ex , WebRequest request){
+        ErrorDetails errorDetails =
+                new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
+        return  errorDetails;
+    }
+
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    @ExceptionHandler(UnAuthorizedException.class)
+    public ErrorDetails unAuthorizedHandling(UnAuthorizedException ex , WebRequest request){
         ErrorDetails errorDetails =
                 new ErrorDetails(new Date(), ex.getMessage(), request.getDescription(false));
         return  errorDetails;
