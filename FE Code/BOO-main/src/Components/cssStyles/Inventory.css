@@ -1,0 +1,31 @@
+/*PANELS*/
+.inventory{
+    width: 1500px; 
+    height: 800px;   
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background: lavender;
+}
+
+.fullpanelInventory{
+        display: flex;
+        border-radius: 20px;
+        padding: 20px;
+        width: 1465x; 
+        height: 700px;   
+}
+
+.panelInventory{
+    width: 1280px;
+    padding: 20px;
+    border-radius: 0px 20px 20px 0px;
+    overflow: hidden;
+    background-image: linear-gradient(to left,rgb(97, 122, 227, 0.4),rgb(234, 79, 207, 0.4));
+}
+
+.profnavInventory{
+    background-color:  rgb(205, 159, 248);
+    border-radius: 20px 0px 0px 20px;
+}
+
+

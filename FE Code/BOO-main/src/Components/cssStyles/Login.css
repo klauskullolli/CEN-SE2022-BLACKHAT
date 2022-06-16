@@ -1,0 +1,67 @@
+.login{
+    width: 1500px; 
+    height: 800px;   
+    overflow-x: hidden;
+    overflow-y: hidden;
+    background: #b4b4f69e;
+    align-items: center;
+}
+
+.smalpanel{
+    background: linear-gradient(#fabaf6, #b7abfd);
+    width: 400px;
+    height: 640px;
+    border-radius: 20px;
+    margin-top: 50px;
+    margin-left: 550px;
+    filter: drop-shadow(0px 5px 1px grey);
+}
+
+.loginImg{
+    width: 160px;
+    margin-left: 120px;
+    margin-top: 30px;
+    filter: drop-shadow(0px 5px 1px grey);
+}
+
+.loginText{
+    font-size: 25px;
+    margin-left: 172px;
+    color: rgb(225, 125, 190);
+}
+
+.lowPanel{
+    /* background: linear-gradient(#facef6, #d1cdfd); */
+    margin-top: 30px;
+    height: 243px;
+    border-radius: 20px;
+    padding: 50px 90px;
+}
+
+.usernameText, .passwordText{
+    font-size: 18px;
+}
+
+.usernameInput, .passwordInput{
+    border-radius: 10px;
+    height: 30px;
+    width: 230px;
+    border: none;
+    outline: none;
+    filter: drop-shadow(0px 2px 1px rgb(161, 159, 159));
+    display: flex;
+}
+
+.signin{
+    margin-top: 50px;
+    border-radius: 14px;
+    height: 32px;
+    width: 130px;
+    font-style: bold;
+    font-size: 16px;
+    color: white;
+    background: #7a7cdf;
+    border: none;
+    margin-left: 46px;
+}
+

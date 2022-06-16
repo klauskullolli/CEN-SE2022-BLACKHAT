@@ -1,0 +1,192 @@
+/*PANELS*/
+.employee{
+    width: 1500px; 
+    height: 800px;   
+    overflow-x: hidden;
+    background: lavender;
+}
+
+.employee::-webkit-scrollbar{
+    display: none;
+}
+
+.fpanel{
+        display: flex;
+        border-radius: 20px;
+        padding: 20px;
+        width: 1465x; 
+        height: 700px;   
+}
+
+.panell{
+    width: 1280px;
+    padding: 20px;
+    border-radius: 0px 20px 20px 0px;
+    overflow: hidden;
+    background-image: linear-gradient(to left,rgb(97, 122, 227, 0.4),rgb(234, 79, 207, 0.4));
+}
+
+.imgnav{
+    background-color:  rgb(205, 159, 248);
+    border-radius: 20px 0px 0px 20px;
+}
+
+
+
+/*EMPLOYEE LIST*/
+.employeeList{
+    display: grid;
+    align-items: center;
+    padding: 10px 110px;
+    overflow-X: hidden;
+    overflow-y: scroll;
+    width: 1110px;
+    height: 567px;
+    grid-gap: 25px;
+    grid-template-columns: repeat(6, 150px);}
+
+.employeeList::-webkit-scrollbar{
+    display: none;
+}
+
+
+
+
+/*A SINGLE EMPLOYEE*/
+.empl{
+    width: 145px;
+    height: 200px;
+    border-radius: 1rem;
+    box-shadow: 0px 4px 0px rgba(0,0,0,0.1);
+    font-style: italic;
+    text-align: center;
+}
+
+.employeesPhotos{
+    width: 120px;
+    margin-top: 4px;
+}
+
+
+
+/*SHARED*/
+/*LOGOS*/
+.epoka{
+    width: 100px;
+    margin: 0px;
+}
+
+.bereqet{
+    width: 93px;
+    margin: 0px;
+}
+.logos{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 15px; 
+    background: white;
+    stroke-width: 0.2px;
+    border-color: lavender;
+    border-style: solid;
+}
+
+
+
+
+/*SEARCH*/
+.headerr{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 15px; 
+    height: 60px;
+}
+
+.inputBox{
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    padding: 8px 18px;
+    width: 524px;
+}
+
+.search{
+    width: 100%;
+    outline: none;
+    border: none;
+    background: transparent;
+    color: grey;
+    padding-left: 130px;
+}
+
+
+
+
+
+/*NAVIGATION BAR*/
+.navigationBar{
+    font-size: 20px;
+    margin-top: 100px;
+    flex-direction: column;
+    text-align: center;
+}
+
+.pnav a:link{
+    text-decoration: none;
+}
+
+.nav{
+    width: 200px;
+    height: 36px;
+}
+
+.nav:hover {
+    /* transform: translateY(-20px); */
+    background: rgb(221, 162, 246);
+}
+
+.profileAndNav{
+    background-color:  rgb(205, 159, 248);
+    border-radius: 20px 0px 0px 20px;
+}
+
+
+
+
+/*PROFILE*/
+.profile{
+    height: 220px;
+    padding-left: 50px;
+    margin-top: 80px;
+}
+
+.myProfilePhoto{
+    width: 120px;
+    height: 120px;
+    border-radius: 100px;
+    background: rgb(12, 35, 80, 0.3);
+}
+
+.editLink{
+    margin-left: 34px;
+}
+
+
+
+/*ADD NEW EMPLOYEE*/
+.addEmployee{
+    width: 145px;
+    height: 200px;
+    border-radius: 20px;
+    margin-top: 20px;
+
+}
+
+.addIconImage{
+    width: 190px;
+    margin-top: -7px;
+    margin-left: -16px;
+}

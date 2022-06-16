@@ -1,0 +1,131 @@
+/*PANELS*/
+.editprd{
+    width: 1500px; 
+    height: 800px;   
+    overflow-x: hidden;
+    background: lavender;
+}
+
+.profilenav{
+    background-color:  rgb(205, 159, 248);
+    border-radius: 20px 0px 0px 20px;
+}
+
+.fupanel{
+    display: flex;
+    border-radius: 20px;
+    padding: 20px;
+    width: 1465x; 
+    height: 700px; 
+}
+
+.ppanell{
+    width: 1280px;
+    padding: 20px;
+    border-radius: 0px 20px 20px 0px;
+    overflow: hidden;
+    background-image: linear-gradient(to left,rgb(97, 122, 227, 0.4),rgb(234, 79, 207, 0.4));
+}
+
+.smallpanel{
+    background: #e0d9f5;
+    width: 430px;
+    height: 650px;
+    margin-left: 350px;
+    border-radius: 20px;
+}
+
+.bottomPanell{
+    background: linear-gradient(#facef6, #d1cdfd);
+    margin-top: 30px;
+    height: 330px;
+    border-radius: 20px;
+    padding: 20px 30px;
+    display: grid;
+    filter: drop-shadow(0px 4px 1px rgba(38, 35, 35, 0.297));
+}
+
+
+/*SMALL PANEL ELEMENTS*/
+.goBackIconImage{
+    width: 40px;
+    /* background-color: red; */
+    margin-left: 17px;
+    padding-bottom: 165px;
+}
+
+.burgerImg{
+    width: 250px;
+    /* background: red; */
+    margin-left: 25px;
+    padding-top: 50px;
+    /* background-color: red; */
+    filter: drop-shadow(0px 5px 1px grey);
+}
+
+.updatePhotoLink{
+    margin-left: 169px;
+    color: #409F4F;
+}
+
+.name, .amount, .price{
+    border-radius: 10px;
+    height: 27px;
+    width: 80px;
+    border: none;
+    outline: none;
+    filter: drop-shadow(0px 2px 1px rgb(161, 159, 159));
+}
+
+.description1{
+    margin-top: 20px;
+}
+
+.amount1{
+    /* background-color: blue; */
+    margin-left: 288px;
+    margin-top: -50px;
+}
+
+.description{
+    width: 370px;
+    height: 70px;
+    border-radius: 14px;
+    border: none;
+    outline: none;
+    filter: drop-shadow(0px 2px 1px rgb(161, 159, 159));
+}
+
+.name2, .amount2, .description2, .price2{
+    margin-left: 5px;
+    font-size: 16px;
+}
+
+.buttonn{
+    display: flex;
+    gap: 30px;
+    height:150px;
+    margin-top: 50px;
+}
+
+.red{
+    background: #FF9DBB;
+    border-radius: 20px;
+    height: 35px;
+    width: 172px;
+    font-style: bold;
+    font-size: 16px;
+    color: white;
+    border: none;
+}
+
+.blue{
+    background: #9F9DFF;
+    border-radius: 20px;
+    height: 35px;
+    width: 172px;
+    font-style: bold;
+    font-size: 16px;
+    color: white;
+    border: none;
+}
