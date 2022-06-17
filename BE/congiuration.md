@@ -8,10 +8,10 @@ Open project into intelij
 Create Database on your local database ( we named boo)
 
 # Step 4
-At application.property of spring project configure: 
-spring.datasource.url = jdbc:mysql://localhost:3306/boo (this is example) put your local batabase address 
-spring.datasource.username = "your useranme"
-spring.datasource.password =  "your password"
+At application.property of spring project configure:\n
+spring.datasource.url = jdbc:mysql://localhost:3306/boo (this is example) put your local batabase address \n 
+spring.datasource.username = "your useranme" \n
+spring.datasource.password =  "your password" \n
 
 # Step 5
 Use maven command --> maven  clean install 
