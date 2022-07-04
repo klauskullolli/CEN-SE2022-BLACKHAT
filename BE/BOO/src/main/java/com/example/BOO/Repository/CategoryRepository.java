@@ -14,6 +14,6 @@ public interface CategoryRepository extends JpaRepository<Category, Integer> {
     Optional<Category> findByName(String name);
 
     @Query(value = "select * from category c where  c.belonging= :belonging", nativeQuery = true)
-    List<Category> findCategoryByBelonging(Belonging belonging) ;
+    List<Category> findCategoryByBelonging(Integer belonging) ;
 
 }

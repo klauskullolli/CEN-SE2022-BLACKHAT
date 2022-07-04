@@ -87,10 +87,10 @@ public class CategoryController {
 
         name = name.toUpperCase(Locale.ROOT) ;
         if(Belonging.CAFETERIA.name().equals(name)){
-            return new ResponseEntity<>(categoryRepository.findCategoryByBelonging(Belonging.CAFETERIA) , HttpStatus.OK) ;
+            return new ResponseEntity<>(categoryRepository.findCategoryByBelonging(1) , HttpStatus.OK) ;
         }
         else if(Belonging.CANTINA.name().equals(name)){
-            return new ResponseEntity<>(categoryRepository.findCategoryByBelonging(Belonging.CANTINA) , HttpStatus.OK) ;
+            return new ResponseEntity<>(categoryRepository.findCategoryByBelonging(2) , HttpStatus.OK) ;
         }
         else{
             throw  new ResourceNotFoundException("Belonging with name: " + name+ " does not exist") ;
