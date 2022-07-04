@@ -5,9 +5,7 @@ import com.example.BOO.Enum.Role;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 
-@Table(name = "Admin", indexes = {
-        @Index(name = "idx_admin_username", columnList = "username")
-})
+@Table(name = "Admin")
 @Entity
 public class Admin {
     @Id
