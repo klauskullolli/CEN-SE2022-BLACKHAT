@@ -14,12 +14,14 @@ public class AdminContoroller {
     @Autowired
     AdminRepository adminRepository ;
 
+    @CrossOrigin
      @GetMapping
      public Admin getAdmin(){
          return adminRepository.findAll().get(0) ;
      }
 
 
+    @CrossOrigin
      @PostMapping
      public Admin updateAdmin(@Valid  @RequestBody Admin admin){
            Admin newAdmin = adminRepository.findAll().get(0) ;

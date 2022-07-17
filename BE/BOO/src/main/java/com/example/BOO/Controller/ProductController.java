@@ -26,18 +26,21 @@ public class ProductController {
     @Autowired
     CategoryRepository categoryRepository ;
 
+    @CrossOrigin
     @GetMapping
     public List<Product> getAllProducts() {
         return productRepository.findAll();
     }
 
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<?> getProductById(@PathVariable Integer id) {
         return productRepository.findById(id).map(product ->new ResponseEntity<>(product, HttpStatus.OK)).
                 orElseThrow(()->new ResourceNotFoundException("Product with Id: " + id+ " does not exist"));
     }
 
+    @CrossOrigin
     @PostMapping("category/{category_id}")
     public ResponseEntity<Product> createProduct( @PathVariable Integer category_id, @Valid @RequestBody Product product) {
 
@@ -48,6 +51,7 @@ public class ProductController {
         }).orElseThrow(()-> new ResourceNotFoundException("Category with id: " + category_id+ " does not exist") ) ;
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<Product> updateProduct(@PathVariable Integer id,@Valid @RequestBody Product product)  {
         Optional<Product> prod = productRepository.findById(id);
@@ -64,6 +68,7 @@ public class ProductController {
         }
     }
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<Product> deleteProduct(@PathVariable Integer id) {
         Optional<Product> prod = productRepository.findById(id);

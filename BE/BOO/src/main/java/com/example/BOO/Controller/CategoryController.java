@@ -90,7 +90,7 @@ public class CategoryController {
             return new ResponseEntity<>(categoryRepository.findCategoryByBelonging(1) , HttpStatus.OK) ;
         }
         else if(Belonging.CANTINA.name().equals(name)){
-            return new ResponseEntity<>(categoryRepository.findCategoryByBelonging(2) , HttpStatus.OK) ;
+            return new ResponseEntity<>(categoryRepository.findCategoryByBelonging(0) , HttpStatus.OK) ;
         }
         else{
             throw  new ResourceNotFoundException("Belonging with name: " + name+ " does not exist") ;

@@ -29,12 +29,14 @@ public class SellerController {
     @Autowired
     BillRepository billRepository;
 
+    @CrossOrigin
     @GetMapping()
     public List<Seller> getSellers(){
         return sellerRepository.findAll();
     }
 
 
+    @CrossOrigin
     @GetMapping("/{id}")
     public ResponseEntity<Seller> getSeller(@PathVariable Integer id){
         return sellerRepository.findById(id).map(seller -> {
@@ -42,6 +44,7 @@ public class SellerController {
         }).orElseThrow(()->new ResourceNotFoundException("Seller with Id: " + id+ " does not exist")) ;
     }
 
+    @CrossOrigin
     @PostMapping
     public  ResponseEntity<Seller> createSeller(@Valid @RequestBody Seller seller){
         seller.setRole(Role.SELLER);
@@ -49,6 +52,7 @@ public class SellerController {
         return new ResponseEntity<>(sellerRepository.save(seller), HttpStatus.CREATED) ;
     }
 
+    @CrossOrigin
     @PutMapping("/{id}")
     public ResponseEntity<Seller> updateSeller ( @PathVariable Integer id, @Valid @RequestBody Seller seller){
         Optional<Seller> sell = sellerRepository.findById(id) ;
@@ -67,6 +71,7 @@ public class SellerController {
 
 
 
+    @CrossOrigin
     @DeleteMapping("/{id}")
     public ResponseEntity<Seller> deleteSeller ( @PathVariable Integer id){
         Optional<Seller> sell = sellerRepository.findById(id) ;
@@ -79,6 +84,7 @@ public class SellerController {
         }
     }
 
+    @CrossOrigin
     @GetMapping("/{id}/bills")
     public ResponseEntity<?> getSellerBills(@PathVariable Integer id){
         return sellerRepository.findById(id).map(seller -> {
@@ -86,6 +92,7 @@ public class SellerController {
         }).orElseThrow(()->new ResourceNotFoundException("Seller with Id: " + id+ " does not exist")) ;
     }
 
+    @CrossOrigin
     @GetMapping("/{id}/orders")
     public ResponseEntity<?> getSellerOrders(@PathVariable Integer id){
         return sellerRepository.findById(id).map(seller -> {
@@ -93,6 +100,7 @@ public class SellerController {
         }).orElseThrow(()->new ResourceNotFoundException("Seller with Id: " + id+ " does not exist")) ;
     }
 
+    @CrossOrigin
     @PutMapping("{id}/turn")
     public ResponseEntity<?> updateWorkingStatus(@PathVariable Integer id , @RequestParam(value = "open") boolean open){
         return sellerRepository.findById(id).map(seller -> {
