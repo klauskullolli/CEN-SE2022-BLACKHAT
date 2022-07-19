@@ -22,7 +22,7 @@ public class BillProduct {
 
     private  Double price ;
 
-    @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.LAZY )
     @JoinColumn(name = "product_id")
     @JsonIgnore
     private Product product;
