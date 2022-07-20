@@ -26,7 +26,6 @@ public class Bill {
     private Date createdTime;
 
 
-
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "seller_id")
     @JsonIgnore
