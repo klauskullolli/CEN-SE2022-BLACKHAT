@@ -1,4 +1,4 @@
-package com.example.BOO.Model;
+package com.example.BOO.DTO;
 
 import java.util.Date;
 
