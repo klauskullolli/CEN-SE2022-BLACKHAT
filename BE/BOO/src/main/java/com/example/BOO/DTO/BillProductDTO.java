@@ -1,16 +1,18 @@
 package com.example.BOO.DTO;
 
+import java.math.BigDecimal;
+
 public class BillProductDTO {
-    private String product_Id ;
+    private Integer product_Id ;
     private String  name ;
-    private Integer amount;
-    private  Double price ;
+    private BigDecimal amount;
+    private Double price ;
     private  String category;
 
     public BillProductDTO() {
     }
 
-    public BillProductDTO(String product_Id, String name, Integer amount, Double price, String category) {
+    public BillProductDTO(Integer product_Id, String name, BigDecimal amount, Double price, String category) {
         this.product_Id = product_Id;
         this.name = name;
         this.amount = amount;
@@ -18,11 +20,11 @@ public class BillProductDTO {
         this.category = category;
     }
 
-    public String getProduct_Id() {
+    public Integer getProduct_Id() {
         return product_Id;
     }
 
-    public void setProduct_Id(String product_Id) {
+    public void setProduct_Id(Integer product_Id) {
         this.product_Id = product_Id;
     }
 
@@ -34,11 +36,11 @@ public class BillProductDTO {
         this.name = name;
     }
 
-    public Integer getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(Integer amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 

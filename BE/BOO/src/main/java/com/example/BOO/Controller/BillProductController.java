@@ -1,8 +1,10 @@
 package com.example.BOO.Controller;
 
+import com.example.BOO.DTO.BillProductDTO;
 import com.example.BOO.Exception.ResourceNotFoundException;
 import com.example.BOO.Model.BillProduct;
 import com.example.BOO.Repository.BillProductRepository;
+import com.example.BOO.Service.BillProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +28,8 @@ public class BillProductController {
         return billProductRepository.findAll();
     }
 
+    @Autowired
+    BillProductService billProductService ;
 
     @GetMapping("/{id}")
     public ResponseEntity<BillProduct> getBillProduct(@PathVariable Integer id){
@@ -35,7 +39,10 @@ public class BillProductController {
     }
 
 
-
+    @GetMapping("/query")
+    public List<BillProductDTO> getQuery(){
+        return billProductService.query() ;
+    }
 
 
 }

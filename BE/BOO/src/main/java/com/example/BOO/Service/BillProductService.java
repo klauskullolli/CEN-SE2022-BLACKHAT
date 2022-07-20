@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -19,22 +20,22 @@ public class BillProductService {
     EntityManager entityManager ;
 
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    public List<BillProductDTO> query(String productName, String categoryName, String from , String to){
-        List<BillProductDTO> billProductDTOs = new ArrayList<>() ;
-        String query =  "select p.id, bp.product_name, sum(bp.amount), sum(bp.amount * bp.price), c.name from bill_product bp \n" +
-                "inner join bill b on b.id = bp.bill_id \n" +
-                "inner join product p on bp.product_id = p.id\n" +
-                "inner join  category c on p.category_id = c.id\n" +
-                "group by bp.product_name ;"  ;
-        Query queryRes = entityManager.createNativeQuery(query) ;
-        List<Object[]> result  = queryRes.getResultList() ;
-
-        for (Object[] obj  : result){
-            billProductDTOs.add(new BillProductDTO((String) obj[0], (String) obj[1], (Integer)  obj[2], (Double) obj[3], (String)  obj[4] ));
-        }
-
-        return billProductDTOs ;
-    }
+//    public List<BillProductDTO> query(String productName, String categoryName, String from , String to){
+//        List<BillProductDTO> billProductDTOs = new ArrayList<>() ;
+//        String query =  "select p.id, bp.product_name, sum(bp.amount), sum(bp.amount * bp.price), c.name from bill_product bp \n" +
+//                "inner join bill b on b.id = bp.bill_id \n" +
+//                "inner join product p on bp.product_id = p.id\n" +
+//                "inner join  category c on p.category_id = c.id\n" +
+//                "group by bp.product_name ;"  ;
+//        Query queryRes = entityManager.createNativeQuery(query) ;
+//        List<Object[]> result  = queryRes.getResultList() ;
+//
+//        for (Object[] obj  : result){
+//            billProductDTOs.add(new BillProductDTO((Integer) obj[0], (String) obj[1], (BigDecimal)  obj[2], (BigDecimal) obj[3], (String)  obj[4] ));
+//        }
+//
+//        return billProductDTOs ;
+//    }
 
 
     public List<BillProductDTO> query(){
@@ -48,19 +49,19 @@ public class BillProductService {
         List<Object[]> result  = queryRes.getResultList() ;
 
         for (Object[] obj  : result){
-            billProductDTOs.add(new BillProductDTO((String) obj[0], (String) obj[1], (Integer)  obj[2], (Double) obj[3], (String)  obj[4] ));
+            billProductDTOs.add(new BillProductDTO((Integer) obj[0], (String) obj[1], (BigDecimal)  obj[2], (Double) obj[3], (String)  obj[4] ));
         }
 
         return billProductDTOs ;
     }
 
-    @Test
-    private void test(){
-        List<BillProductDTO> billProductDTOs = query() ;
-
-        for (BillProductDTO bp: billProductDTOs ){
-            System.out.println(bp);
-        }
-    }
+//    @Test
+//    public void test(){
+//        List<BillProductDTO> billProductDTOs = query() ;
+//
+//        for (BillProductDTO bp: billProductDTOs ){
+//            System.out.println(bp);
+//        }
+//    }
 
 }
