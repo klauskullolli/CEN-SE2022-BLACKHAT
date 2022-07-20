@@ -22,17 +22,19 @@ public class BillProductController {
     @Autowired
     BillProductRepository billProductRepository ;
     @GetMapping()
-    public List<BillProduct> getBills(){
+    public List<BillProduct> getBillProducts(){
         return billProductRepository.findAll();
     }
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<BillProduct> getBill(@PathVariable Integer id){
+    public ResponseEntity<BillProduct> getBillProduct(@PathVariable Integer id){
         return billProductRepository.findById(id).map(bill -> {
             return new ResponseEntity<>(bill , HttpStatus.OK) ;
         }).orElseThrow(()->new ResourceNotFoundException("This Bill Product with this Id: " + id+ " does not exist")) ;
     }
+
+
 
 
 

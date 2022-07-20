@@ -2,9 +2,11 @@ package com.example.BOO.Controller;
 
 import com.example.BOO.Exception.ResourceNotFoundException;
 import com.example.BOO.Model.Bill;
-import com.example.BOO.Model.BillDTOResponse;
+import com.example.BOO.DTO.BillDTOResponse;
 import com.example.BOO.Model.BillProduct;
+import com.example.BOO.Model.Product;
 import com.example.BOO.Repository.BillRepository;
+import com.example.BOO.Repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -12,7 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
-import javax.persistence.EntityManager;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,6 +27,9 @@ public class BillController {
 
     @Autowired
     BillRepository billRepository ;
+
+    @Autowired
+    ProductRepository productRepository ;
 
     @GetMapping()
     public List<Bill> getBills(){
@@ -50,6 +54,13 @@ public class BillController {
             throw new ResourceNotFoundException("Bill with id: " + id+ " does not exist") ;
         }
         else {
+            Bill bill = billOptional.get();
+            bill.getBillProducts().forEach(p->{
+                Product product = p.getProduct() ;
+                product.setAmount(product.getAmount() + p.getAmount());
+                productRepository.save(product) ;
+            });
+
             billRepository.deleteById(id);
             return   new ResponseEntity<>(billOptional.get(), HttpStatus.OK) ;
         }
