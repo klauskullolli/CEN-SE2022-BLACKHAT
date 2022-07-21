@@ -1,29 +1,18 @@
-package com.example.BOO.Service;
+package com.example.BOO.General;
 
 import com.example.BOO.DTO.BillProductDTO;
 import org.junit.Test;
-import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Service
-public class BillProductService {
-
-    @PersistenceContext
-    EntityManager entityManager ;
-
-    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+public class QueryTest {
 
 
-
-    public List<BillProductDTO> query(String productName, String categoryName, String from , String to){
+    public String query(String productName, String categoryName, String from , String to){
         List<BillProductDTO> billProductDTOs = new ArrayList<>() ;
         String query =  "select p.id, bp.product_name, sum(bp.amount), sum(bp.amount * bp.price), c.name from bill_product bp \n" +
                 "inner join bill b on b.id = bp.bill_id \n" +
@@ -57,7 +46,7 @@ public class BillProductService {
         }
         else{
             Date now = new Date() ;
-            String dateCriteria = String.format("b.created_time => '%s' ", formatter.format(now));
+            String dateCriteria = String.format("b.created_time => '%s' ", now);
             criteria.add(dateCriteria) ;
 
         }
@@ -66,16 +55,29 @@ public class BillProductService {
 
         query += criteriaString + "\n group by bp.product_name ;" ;
 
-        Query queryRes = entityManager.createNativeQuery(query) ;
-        List<Object[]> result  = queryRes.getResultList() ;
 
-        for (Object[] obj  : result){
-            billProductDTOs.add(new BillProductDTO((Integer) obj[0], (String) obj[1], (BigDecimal)  obj[2], (Double) obj[3], (String)  obj[4] ));
-        }
-
-        return billProductDTOs ;
+        return query ;
     }
 
 
+    @Test
+    public void test1(){
+        System.out.println(query("klaus", "hello", "12-05-2022" , "20-05-2022"));
+        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println(query(null, "hello", "12-05-2022" , "20-05-2022"));
+        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println(query(null, null, "12-05-2022" , "20-05-2022"));
+        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println(query("klaus", null, "12-05-2022" , "20-05-2022"));
+        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println(query("klaus", "hello", null , "20-05-2022"));
+        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println(query("klaus", "hello", "12-05-2022", null));
+        System.out.println("-----------------------------------------------------------------------------------");
+        System.out.println(query("klaus", "hello", null, null));
+        System.out.println("-----------------------------------------------------------------------------------");
+
+
+    }
 
 }

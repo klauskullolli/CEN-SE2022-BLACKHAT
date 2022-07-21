@@ -6,14 +6,14 @@ import com.example.BOO.Model.BillProduct;
 import com.example.BOO.Repository.BillProductRepository;
 import com.example.BOO.Service.BillProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -31,6 +31,8 @@ public class BillProductController {
     @Autowired
     BillProductService billProductService ;
 
+    private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+
     @GetMapping("/{id}")
     public ResponseEntity<BillProduct> getBillProduct(@PathVariable Integer id){
         return billProductRepository.findById(id).map(bill -> {
@@ -40,8 +42,19 @@ public class BillProductController {
 
 
     @GetMapping("/query")
-    public List<BillProductDTO> getQuery(){
-        return billProductService.query() ;
+    public ResponseEntity<?> getQuery(@RequestParam(required = false) String productName ,@RequestParam(required = false) String categoryName,  @RequestParam(required = false) @DateTimeFormat(pattern = "yyyy-MM-dd") Date from , @RequestParam(required = false)@DateTimeFormat(pattern = "yyyy-MM-dd") Date to){
+
+        if (from !=null && to!=null && from.after(to)){
+            throw new ResourceNotFoundException("From date should be before after") ;
+        }
+        else{
+            String fromStr =  from != null ? formatter.format(from) : null ;
+            String toStr = to != null ? formatter.format(to) : null ;
+
+            return new ResponseEntity<>(billProductService.query(productName, categoryName, fromStr, toStr), HttpStatus.OK) ;
+        }
+
+
     }
 
 
