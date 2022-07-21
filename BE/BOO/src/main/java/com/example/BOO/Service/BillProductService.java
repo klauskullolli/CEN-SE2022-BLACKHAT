@@ -43,21 +43,21 @@ public class BillProductService {
         }
 
         if ((from != null && !from.isEmpty()) && (to != null && !to.isEmpty())){
-            String dateCriteria = String.format("b.created_time => '%s' and b.created_time <= '%s' ", from, to);
+            String dateCriteria = String.format("b.created_time >= '%s' and b.created_time <= '%s' ", from, to);
             criteria.add(dateCriteria) ;
         }
         else if (to != null && !to.isEmpty()){
-            String dateCriteria = String.format("b.created_time => '%s' ", to);
+            String dateCriteria = String.format("b.created_time >= '%s' ", to);
             criteria.add(dateCriteria) ;
         }
 
         else if (from != null && !from.isEmpty()){
-            String dateCriteria = String.format("b.created_time => '%s' ", from);
+            String dateCriteria = String.format("b.created_time >= '%s' ", from);
             criteria.add(dateCriteria) ;
         }
         else{
             Date now = new Date() ;
-            String dateCriteria = String.format("b.created_time => '%s' ", formatter.format(now));
+            String dateCriteria = String.format("b.created_time >= '%s' ", formatter.format(now));
             criteria.add(dateCriteria) ;
 
         }
